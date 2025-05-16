@@ -1,5 +1,7 @@
 using GymTracker.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using GymTracker.Application.Mapping;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddAutoMapper(typeof(UserProfile).Assembly);
 
 var app = builder.Build();
 
