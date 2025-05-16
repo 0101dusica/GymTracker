@@ -27,4 +27,5 @@ Thumbs.db
 # === Git ===
 *.orig
 
-gymtrackr.db
+gymtracker.db
+*.db
