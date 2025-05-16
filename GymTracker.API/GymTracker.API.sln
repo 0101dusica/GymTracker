@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymTracker.API", "GymTracker.API.csproj", "{0709A785-FC6F-4B7D-8D49-8E83BB30105E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0709A785-FC6F-4B7D-8D49-8E83BB30105E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0709A785-FC6F-4B7D-8D49-8E83BB30105E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0709A785-FC6F-4B7D-8D49-8E83BB30105E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0709A785-FC6F-4B7D-8D49-8E83BB30105E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C49E5DFD-3A19-4F85-ACA6-70F364314E29}
+	EndGlobalSection
+EndGlobal

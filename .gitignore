@@ -1,0 +1,28 @@
+# === .NET ===
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+*.vs/
+
+# === ASP.NET secrets ===
+secrets.json
+
+# === Angular / Node ===
+node_modules/
+dist/
+tmp/
+.angular/
+.env
+.env.*
+
+# === OS / IDE Files ===
+.DS_Store
+Thumbs.db
+*.log
+
+# === Git ===
+*.orig
