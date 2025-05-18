@@ -2,6 +2,8 @@ using GymTracker.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using GymTracker.Application.Mapping;
 using AutoMapper;
+using GymTracker.Application.Interfaces;
+using GymTracker.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,17 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddAutoMapper(typeof(UserProfile).Assembly);
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -26,8 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
-
+app.UseCors("AllowAll");
 app.UseAuthorization();
 
 app.MapControllers();
