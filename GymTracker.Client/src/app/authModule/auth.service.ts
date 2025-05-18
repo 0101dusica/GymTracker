@@ -30,4 +30,9 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
+
+  register(user: any) {
+    return this.http.post(`${this.apiUrl}/register`, user);
+  }
+  
 }
