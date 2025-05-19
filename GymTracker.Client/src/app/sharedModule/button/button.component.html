@@ -1,0 +1,14 @@
+<button
+  [class.primary]="variant === 'primary'"
+  [class.outline]="variant === 'outline'"
+  [disabled]="disabled || loading"
+  (click)="onClick()"
+>
+  <ng-container *ngIf="!loading; else processingTpl">
+    {{ label }}
+  </ng-container>
+
+  <ng-template #processingTpl>
+    <span class="spinner"></span> Processing...
+  </ng-template>
+</button>
