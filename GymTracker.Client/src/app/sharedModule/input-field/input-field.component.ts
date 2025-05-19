@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -10,8 +10,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './input-field.component.scss'
 })
 export class InputFieldComponent {
-    @Input() placeholder: string = '';
-    @Input() type: string = 'text';
-    @Input() name: string = '';
-    @Input() model: any; 
+  @Input() placeholder: string = '';
+  @Input() type: string = 'text';
+  @Input() name: string = '';
+  @Input() value: string = '';
+
+  @Output() valueChange = new EventEmitter<string>(); 
+
+  onInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.value = input.value;
+    this.valueChange.emit(this.value);
+  }
 }

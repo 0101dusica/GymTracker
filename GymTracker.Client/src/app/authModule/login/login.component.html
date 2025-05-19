@@ -6,12 +6,12 @@
         <div class="logo-circle">
           <img src="logo.png" alt="GymTracker Logo" class="logo" />
         </div>
-        <form class="login-form">
+        <form class="login-form" #form="ngForm" (ngSubmit)="onLogin()">
           <h2 class="main-title">Welcome Back to GymTracker</h2>
           <h3 class="subtitle">Log In to Your Account</h3>
 
-          <app-input-field [(ngModel)]="email" name="email" placeholder="Email" type="email"></app-input-field>
-          <app-input-field [(ngModel)]="password" name="password" placeholder="Password" type="password"></app-input-field>
+          <app-input-field [(value)]="email" name="email" placeholder="Email" type="email"></app-input-field>
+          <app-input-field [(value)]="password" name="password" placeholder="Password" type="password"></app-input-field>
 
           <app-simple-button label="Submit" variant="primary" [loading]="loading" (submit)="onLogin()"></app-simple-button>
 
