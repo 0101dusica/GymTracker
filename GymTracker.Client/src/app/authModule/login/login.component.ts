@@ -18,7 +18,6 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  showPassword = false;
   loading: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -53,9 +52,5 @@ export class LoginComponent {
         this.loading = false;
       }
     });
-  }
-
-  togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword;
   }
 }
