@@ -1,7 +1,6 @@
 using GymTracker.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using GymTracker.Application.Mapping;
-using AutoMapper;
 using GymTracker.Application.Interfaces;
 using GymTracker.Application.Services;
 
@@ -29,6 +28,9 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 var app = builder.Build();
 
