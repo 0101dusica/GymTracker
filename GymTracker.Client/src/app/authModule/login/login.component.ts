@@ -24,6 +24,36 @@ export class LoginComponent {
 
   onLogin() {
     this.loading = true;
+
+    if (!this.areFieldsFilled()) return;
+    this.performLogin();
+  }
+
+
+  private areFieldsFilled(): boolean {
+      const requiredFields = [
+        this.email, this.password
+      ];
+      console.log('Field values:', requiredFields);
+      
+      const allFilled = requiredFields.every(field => field.trim() !== '');
+    
+      if (!allFilled) {
+        Swal.fire({
+          title: 'Missing fields',
+          text: 'All fields must be filled out.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#5f99be',
+        });
+        this.loading = false;
+        return false;
+      }
+    
+      return true;
+    }
+
+  private performLogin(): void {  
     this.authService.login(this.email, this.password).subscribe({
       next: () => {
         Swal.fire({
@@ -53,4 +83,5 @@ export class LoginComponent {
       }
     });
   }
+
 }
