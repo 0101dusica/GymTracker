@@ -1,7 +1,7 @@
 button {
     border-radius: 10px;
-    padding: 1% 1%;
-    font-size: 90%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     border: none;
@@ -9,9 +9,8 @@ button {
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease, color 0.3s ease;
-    min-width: 50%;
-    min-height: 40px;
-    max-height: 40px;
+    min-width: 56%;
+    height: 40px;
     user-select: none;
   
     &:disabled {
