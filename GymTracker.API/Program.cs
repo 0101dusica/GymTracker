@@ -30,6 +30,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
 
 
 var app = builder.Build();

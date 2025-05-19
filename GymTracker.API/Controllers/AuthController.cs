@@ -16,12 +16,14 @@ namespace GymTracker.API.Controllers
         private readonly AppDbContext _db;
         private readonly ITokenService _tokenService;
         private readonly IEmailService _emailService;
+        private readonly IPasswordHasherService _passwordHasher;
 
-        public AuthController(AppDbContext db, ITokenService tokenService, IEmailService emailService)
+        public AuthController(AppDbContext db, ITokenService tokenService, IEmailService emailService, IPasswordHasherService passwordService)
         {
             _db = db;
             _tokenService = tokenService;
             _emailService = emailService;
+            _passwordHasher = passwordService;
         }
 
         [HttpPost("login")]
@@ -30,8 +32,8 @@ namespace GymTracker.API.Controllers
             var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
             if (user == null) return Unauthorized("Invalid credentials");
 
-            // TODO: Compare with hashed password not just plain text
-            if (user.PasswordHash != dto.Password) return Unauthorized("Invalid credentials");
+            if (!_passwordHasher.VerifyPassword(user.PasswordHash, dto.Password))
+                return Unauthorized("Invalid credentials");
 
             if (!user.IsActive)
                 return Unauthorized("You must confirm your email before logging in.");
@@ -52,7 +54,7 @@ namespace GymTracker.API.Controllers
             var user = new User
             {
                 Email = dto.Email,
-                PasswordHash = dto.Password, // TODO: Hash the password before saving
+                PasswordHash = _passwordHasher.HashPassword(dto.Password),
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 PhoneNumber = dto.PhoneNumber,
