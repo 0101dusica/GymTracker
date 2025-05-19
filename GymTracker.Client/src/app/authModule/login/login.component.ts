@@ -31,7 +31,7 @@ export class LoginComponent {
           text: `Your login was successful!`,
           icon: 'success',
           confirmButtonText: 'OK',
-          confirmButtonColor: '#00c89c',
+          confirmButtonColor: '#5f99be',
           showConfirmButton: true,
           timer: 3000,
         });
@@ -44,7 +44,7 @@ export class LoginComponent {
           text: 'Please fill out all fields correctly.',
           icon: 'error',
           confirmButtonText: 'OK',
-          confirmButtonColor: '#00c89c',
+          confirmButtonColor: '#5f99be',
   
         });
         console.error(err);
