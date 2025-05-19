@@ -1,16 +1,43 @@
-<form (ngSubmit)="onRegister()">
-    <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required />
-    <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required />
-    <input type="text" [(ngModel)]="firstName" name="firstName" placeholder="First Name" required />
-    <input type="text" [(ngModel)]="lastName" name="lastName" placeholder="Last Name" required />
-    <input type="tel" [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Phone Number" />
-    <input type="date" [(ngModel)]="dateOfBirth" name="dateOfBirth" required />
-    
-    <select [(ngModel)]="gender" name="gender" required>
-      <option [ngValue]="0">Male</option>
-      <option [ngValue]="1">Female</option>
-    </select>
-  
-    <button type="submit">Register</button>
-  </form>
-  
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="background">
+      <div class="login-container">
+        <div class="logo-circle">
+          <img src="logo.png" alt="GymTracker Logo" class="logo" />
+        </div>
+        <form class="login-form"  #form="ngForm" (ngSubmit)="onRegister()">
+          <h2 class="main-title">Welcome Back to GymTracker</h2>
+          <h3 class="subtitle">Register New Account</h3>
+
+          <app-input-field [(value)]="email" name="email" placeholder="Email" type="email"></app-input-field>
+          <div class="two-inputs-container">
+            <app-input-field [(value)]="password" name="password" placeholder="Password" type="password"></app-input-field>
+            <span style="margin-right: 5%;"></span>
+            <app-input-field [(value)]="repeatPassword" name="repeatPassword" placeholder="Confirm Password" type="password"></app-input-field>
+          </div>
+
+          <div class="two-inputs-container">
+            <app-input-field [(value)]="firstName" name="firstName" placeholder="First Name" type="text"></app-input-field>
+            <span style="margin-right: 5%;"></span>
+            <app-input-field [(value)]="lastName" name="lastName" placeholder="Last Name" type="text"></app-input-field>
+          </div>
+          <app-input-field [(value)]="phoneNumber" name="phoneNumber" placeholder="Phone Number" type="tel"></app-input-field>
+
+          <input type="date" [(ngModel)]="dateOfBirth" name="dateOfBirth" class="form-control-like"/>
+
+          <select class="custom-select" [(ngModel)]="gender" name="gender" required>
+            <option [ngValue]="0">Male</option>
+            <option [ngValue]="1">Female</option>
+          </select>
+        
+          <app-simple-button label="Register" variant="primary" [loading]="loading" (submit)="onRegister()"></app-simple-button>
+
+        </form>
+        <div class="signup">
+          <p>Already have an account ? <a [routerLink]="['/login']">Log In</a></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
