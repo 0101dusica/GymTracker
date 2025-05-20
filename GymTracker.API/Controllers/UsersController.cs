@@ -4,6 +4,7 @@ using GymTracker.Core.Entities;
 using GymTracker.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace GymTracker.API.Controllers
 {
@@ -55,14 +56,23 @@ namespace GymTracker.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, userDto);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, UserRegisterDto updateDto)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UserResponseDto updateDto)
         {
-            var user = await _db.Users.FindAsync(id);
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out Guid userId))
+            {
+                return Unauthorized();
+            }
+
+            var user = await _db.Users.FindAsync(userId);
             if (user == null) return NotFound();
 
-            _mapper.Map(updateDto, user);
-            // if password changed - hashed before saving
+            user.FirstName = updateDto.FirstName;
+            user.LastName = updateDto.LastName;
+            user.PhoneNumber = updateDto.PhoneNumber;
+            user.DateOfBirth = updateDto.DateOfBirth;
+            user.Gender = (Gender)updateDto.Gender;
 
             await _db.SaveChangesAsync();
             return NoContent();
@@ -78,5 +88,27 @@ namespace GymTracker.API.Controllers
             await _db.SaveChangesAsync();
             return NoContent();
         }
+
+        [HttpGet("me")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+                return Unauthorized();
+
+            if (!Guid.TryParse(userIdClaim.Value, out Guid userId))
+                return Unauthorized();
+
+            var user = await _db.Users.FindAsync(userId);
+            if (user == null)
+                return NotFound();
+
+            var userDto = _mapper.Map<UserResponseDto>(user);
+
+            return Ok(userDto);
+        }
+
+
+
     }
 }
