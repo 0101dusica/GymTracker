@@ -11,6 +11,10 @@
   outline: none;
   transition: border 0.2s ease;
 }
+.custom-input[readonly] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 .custom-input::placeholder {
   color: rgba(30, 30, 32, 0.7);

@@ -73,7 +73,7 @@ export class LoginComponent {
           text: 'Please fill out all fields correctly.',
           icon: 'error',
           confirmButtonText: 'OK',
-          confirmButtonColor: '#ff0f0f',
+          confirmButtonColor: '#df1b1b',
   
         });
         console.error(err);

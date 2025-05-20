@@ -128,7 +128,7 @@ export class RegisterComponent {
           text: errorMsg,
           icon: 'error',
           confirmButtonText: 'OK',
-          confirmButtonColor: '#ff0f0f',
+          confirmButtonColor: '#df1b1b',
         });
         this.loading = false;
       }

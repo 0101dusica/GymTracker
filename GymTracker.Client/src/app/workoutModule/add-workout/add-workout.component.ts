@@ -78,8 +78,6 @@ export class AddWorkoutComponent {
   
     this.workoutService.createWorkout(workoutData).subscribe({
       next: () => {
-        
-      console.log("poziv");
         Swal.fire({
           title: 'Workout saved!',
           text: 'Your session has been recorded successfully.',
@@ -103,7 +101,7 @@ export class AddWorkoutComponent {
           icon: 'error',
           showConfirmButton: false,
           confirmButtonText: 'OK',
-          confirmButtonColor: '#ff0f0f'
+          confirmButtonColor: '#df1b1b'
         });        
         this.loading = false;
       }
