@@ -50,11 +50,10 @@ export class RegisterComponent {
   
     if (!allFilled) {
       Swal.fire({
-        title: 'Missing fields',
-        text: 'All fields must be filled out.',
-        icon: 'error',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#5f99be',
+        title: 'Invalid input',
+        text: 'Please fill in all required fields correctly.',
+        icon: 'warning',
+        confirmButtonColor: '#f0ad4e'
       });
       this.loading = false;
       return false;
@@ -70,9 +69,9 @@ export class RegisterComponent {
       Swal.fire({
         title: 'Invalid phone number',
         text: 'Phone number must contain only digits and may optionally start with +.',
-        icon: 'error',
+        icon: 'warning',
         confirmButtonText: 'OK',
-        confirmButtonColor: '#5f99be',
+        confirmButtonColor: '#f0ad4e',
       });
       this.loading = false;
       return false;
@@ -88,7 +87,7 @@ export class RegisterComponent {
         text: 'Passwords do not match. Please check and try again.',
         icon: 'error',
         confirmButtonText: 'OK',
-        confirmButtonColor: '#5f99be',
+        confirmButtonColor: '#ff0f0f',
       });
       this.loading = false;
       return false;
@@ -129,7 +128,7 @@ export class RegisterComponent {
           text: errorMsg,
           icon: 'error',
           confirmButtonText: 'OK',
-          confirmButtonColor: '#5f99be',
+          confirmButtonColor: '#ff0f0f',
         });
         this.loading = false;
       }

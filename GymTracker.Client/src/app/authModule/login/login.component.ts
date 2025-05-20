@@ -40,11 +40,10 @@ export class LoginComponent {
     
       if (!allFilled) {
         Swal.fire({
-          title: 'Missing fields',
-          text: 'All fields must be filled out.',
-          icon: 'error',
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#5f99be',
+          title: 'Invalid input',
+          text: 'Please fill in all required fields correctly.',
+          icon: 'warning',
+          confirmButtonColor: '#f0ad4e'
         });
         this.loading = false;
         return false;
@@ -74,7 +73,7 @@ export class LoginComponent {
           text: 'Please fill out all fields correctly.',
           icon: 'error',
           confirmButtonText: 'OK',
-          confirmButtonColor: '#5f99be',
+          confirmButtonColor: '#ff0f0f',
   
         });
         console.error(err);
