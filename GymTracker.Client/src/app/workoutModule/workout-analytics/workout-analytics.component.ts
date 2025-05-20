@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { WorkoutService } from '../workout.service';
+import { WeeklyWorkoutDto } from '../workout.model';
 
 @Component({
   selector: 'app-workout-analytics',
@@ -9,23 +11,42 @@ import { RouterModule } from '@angular/router';
   templateUrl: './workout-analytics.component.html',
   styleUrl: './workout-analytics.component.scss'
 })
-export class WorkoutAnalyticsComponent {
+export class WorkoutAnalyticsComponent implements OnInit{
   selectedMonth = new Date();
+  
+  weeklyData: WeeklyWorkoutDto[] = [];
 
-  weeklyData = [
-    { dates: "28.04. - 04.05.", totalDuration: 180, workoutCount: 3, avgIntensity: 6, avgFatigue: 5 },
-    { dates: "05.05. - 11.05.", totalDuration: 240, workoutCount: 4, avgIntensity: 7, avgFatigue: 6 },
-    { dates: "12.05. - 18.05.", totalDuration: 120, workoutCount: 2, avgIntensity: 5, avgFatigue: 4 },
-    { dates: "19.05. - 25.05.", totalDuration: 300, workoutCount: 5, avgIntensity: 8, avgFatigue: 7 },
-    { dates: "26.05. - 01.06.", totalDuration: 230, workoutCount: 4, avgIntensity: 6, avgFatigue: 5 },
-  ];
+  constructor(private workoutService: WorkoutService) {}
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+  
+  loadData(): void {
+    const month = this.selectedMonth.getMonth() + 1;
+    const year = this.selectedMonth.getFullYear();
+
+    console.log("Loading data for:", month, year);
+
+    this.workoutService.getMonthlySummary(month, year).subscribe({
+      next: (data) => {
+        console.log("Data loaded:", data);
+        this.weeklyData = data;
+      },
+      error: (err) => {
+        console.error('Failed to load workout data', err);
+      }
+    });
+  }
   
   prevMonth() {
     this.selectedMonth = new Date(this.selectedMonth.setMonth(this.selectedMonth.getMonth() - 1));
+    this.loadData();
   }
   
   nextMonth() {
     this.selectedMonth = new Date(this.selectedMonth.setMonth(this.selectedMonth.getMonth() + 1));
+    this.loadData();
   }
   
   openWeekDetails(week: any) {

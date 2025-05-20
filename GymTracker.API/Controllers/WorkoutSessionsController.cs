@@ -4,6 +4,9 @@ using GymTracker.Infrastructure.Persistence;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using GymTracker.Application.Interfaces;
 
 namespace GymTracker.API.Controllers
 {
@@ -13,11 +16,13 @@ namespace GymTracker.API.Controllers
     {
         private readonly AppDbContext _db;
         private readonly IMapper _mapper;
+        private readonly IWorkoutService _workoutService;
 
-        public WorkoutSessionsController(AppDbContext db, IMapper mapper)
+        public WorkoutSessionsController(AppDbContext db, IMapper mapper, IWorkoutService workoutService)
         {
             _db = db;
             _mapper = mapper;
+            _workoutService = workoutService;
         }
 
         [HttpGet]
@@ -72,5 +77,21 @@ namespace GymTracker.API.Controllers
             await _db.SaveChangesAsync();
             return NoContent();
         }
+
+        [Authorize]
+        [HttpGet("monthly-summary")]
+        public async Task<IActionResult> GetMonthlySummary([FromQuery] int month, [FromQuery] int year)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized();
+
+            var referenceDate = new DateTime(year, month, 1);
+
+            var summary = await _workoutService.GetMonthlySummaryAsync(userId, referenceDate);
+            return Ok(summary);
+        }
+
     }
 }

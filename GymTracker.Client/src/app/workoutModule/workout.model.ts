@@ -16,4 +16,11 @@ export interface WorkoutSession {
     notes?: string;
     userId: string;
 }
-  
+
+export interface WeeklyWorkoutDto {
+    dates: string;
+    totalDuration: number;
+    workoutCount: number;
+    avgIntensity: number;
+    avgFatigue: number;
+}
