@@ -87,7 +87,7 @@ export class RegisterComponent {
         text: 'Passwords do not match. Please check and try again.',
         icon: 'error',
         confirmButtonText: 'OK',
-        confirmButtonColor: '#ff0f0f',
+        confirmButtonColor: '#df1b1b',
       });
       this.loading = false;
       return false;

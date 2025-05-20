@@ -65,7 +65,7 @@ export class UserDetailComponent implements OnInit {
       next: () => {
         this.loading = false;
         Swal.fire({
-          title: 'Workout saved!',
+          title: 'Data Updated!',
           text: 'Your data has been updated.',
           icon: 'success',
           showConfirmButton: false,
