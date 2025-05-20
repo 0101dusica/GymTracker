@@ -1,1 +1,72 @@
-<p>add-workout works!</p>
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="background">
+      <div class="login-container">
+        <div class="logo-circle">
+          <img src="logo.png" alt="GymTracker Logo" class="logo" />
+        </div>
+        <form class="login-form"  #form="ngForm" (ngSubmit)="onSumbit()">
+          <h2 class="main-title">Record Your Workout</h2>
+          <h3 class="subtitle">Track your progress and stay consistent</h3>
+
+            <input type="datetime-local" [(ngModel)]="timeStamp" name="timeStamp" class="form-control-like"/>
+
+            <select class="custom-select" [(ngModel)]="type" name="type" required>
+                <option [ngValue]="0">Cardio</option>
+                <option [ngValue]="1">Strength</option>
+                <option [ngValue]="2">Flexibility</option>
+                <option [ngValue]="3">Other</option>
+            </select>
+
+            <div class="two-inputs-container">
+                <app-input-field [(value)]="durationMinutes" name="durationMinutes" placeholder="Duration Minutes" type="number"></app-input-field>
+                <span style="margin-right: 5%;"></span>
+                <app-input-field [(value)]="caloriesBurned" name="caloriesBurned" placeholder="Calories Burned" type="number"></app-input-field>
+            </div>
+
+            <app-input-field [(value)]="notes" name="notes" placeholder="Additional Notes" type="text"></app-input-field>
+          
+            <div class="rating-group">
+                <label>
+                  Intensity
+                  <span class="info-icon" title="How demanding the workout is for an average person, on a scale from 1 to 10.">&#9432;</span>
+                </label>
+                <div class="rating-scale">
+                  <button 
+                    *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" 
+                    [class.selected]="intensity == i"
+                    (click)="intensity = i"
+                    type="button"
+                  >
+                    {{ i }}
+                  </button>
+                </div>
+              </div>
+              
+              <div class="rating-group">
+                <label>
+                  Fatigue Level
+                  <span class="info-icon" title="Your personal feeling of tiredness after the workout, on a scale from 1 to 10.">&#9432;</span>
+                </label>
+                <div class="rating-scale">
+                  <button 
+                    *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" 
+                    [class.selected]="fatigueLevel == i"
+                    (click)="fatigueLevel = i"
+                    type="button"
+                  >
+                    {{ i }}
+                  </button>
+                </div>
+              </div>
+              
+        
+            <app-simple-button label="Submit" variant="primary" [loading]="loading"></app-simple-button>
+            <app-simple-button label="Cancel" variant="outline" [routerLink]="['/workouts']"></app-simple-button>
+
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

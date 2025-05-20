@@ -44,10 +44,17 @@ namespace GymTracker.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(WorkoutSessionDto createDto)
+        public async Task<IActionResult> Create([FromBody] WorkoutSessionDto createDto)
         {
+            var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!Guid.TryParse(userIdString, out var userId))
+            {
+                return Unauthorized();
+            }
+
             var workout = _mapper.Map<WorkoutSession>(createDto);
             workout.Id = Guid.NewGuid();
+            workout.UserId = userId;
 
             _db.WorkoutSessions.Add(workout);
             await _db.SaveChangesAsync();

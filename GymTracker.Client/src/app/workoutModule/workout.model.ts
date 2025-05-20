@@ -6,7 +6,7 @@ export enum ExerciseType {
 }
 
 export interface WorkoutSession {
-    id: string;
+    id?: string;
     timestamp: string;
     type: ExerciseType;
     durationMinutes: number;
@@ -14,7 +14,7 @@ export interface WorkoutSession {
     intensity: number;       
     fatigueLevel: number;  
     notes?: string;
-    userId: string;
+    userId?: string;
 }
 
 export interface WeeklyWorkoutDto {
