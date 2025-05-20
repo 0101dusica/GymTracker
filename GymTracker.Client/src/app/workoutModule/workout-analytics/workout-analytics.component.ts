@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { WorkoutService } from '../workout.service';
 import { WeeklyWorkoutDto } from '../workout.model';
+import { AuthService } from '../../authModule/auth.service';
 
 @Component({
   selector: 'app-workout-analytics',
@@ -15,8 +16,9 @@ export class WorkoutAnalyticsComponent implements OnInit{
   selectedMonth = new Date();
   
   weeklyData: WeeklyWorkoutDto[] = [];
+  popupVisible = false;
 
-  constructor(private workoutService: WorkoutService) {}
+  constructor(private workoutService: WorkoutService, private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -26,11 +28,8 @@ export class WorkoutAnalyticsComponent implements OnInit{
     const month = this.selectedMonth.getMonth() + 1;
     const year = this.selectedMonth.getFullYear();
 
-    console.log("Loading data for:", month, year);
-
     this.workoutService.getMonthlySummary(month, year).subscribe({
       next: (data) => {
-        console.log("Data loaded:", data);
         this.weeklyData = data;
       },
       error: (err) => {
@@ -49,7 +48,17 @@ export class WorkoutAnalyticsComponent implements OnInit{
     this.loadData();
   }
   
-  openWeekDetails(week: any) {
-    alert(`Details for Week ${week.weekNumber}`);
+  togglePopup() {
+    this.popupVisible = !this.popupVisible;
+  }
+
+  closePopup(): void {
+    this.popupVisible = false;
+  }  
+
+  logOut() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+    this.popupVisible = false;
   }
 }

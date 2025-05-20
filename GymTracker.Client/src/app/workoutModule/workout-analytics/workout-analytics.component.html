@@ -3,7 +3,31 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <div class="background">
+    <div class="floating-header">
+      <img 
+        src="logoNoText.png" 
+        alt="Logo" 
+        class="floating-logo" 
+        (click)="togglePopup()" 
+      />
+      <div class="floating-popup" *ngIf="popupVisible" (clickOutside)="popupVisible = false">
+        <div class="popup-option" [routerLink]="['/workouts/create']">
+          <img src="runningBlack.png" class="popup-icon" />
+          <span>Add New Workout</span>
+        </div>
+        <div class="popup-option"  [routerLink]="['/manage-account']">
+          <img src="user.png" class="popup-icon" />
+          <span>Manage Account</span>
+        </div>
+        <div class="popup-option" (click)="logOut()">
+          <img src="logout.png" class="popup-icon" />
+          <span>Log Out</span>
+        </div>
+      </div>
+    </div>
+    <div class="background" (click)="closePopup()">
+      
+
         <div class="dashboard-container">
             <div class="logo-circle">
                 <img src="running.png" alt="GymTracker Logo" class="logo" [routerLink]="['/workouts/create']"/>
@@ -19,8 +43,7 @@
               </div>
               <div 
                 class="table-row" 
-                *ngFor="let week of weeklyData" 
-                (click)="openWeekDetails(week)"
+                *ngFor="let week of weeklyData"
               >
                 <div class="column">{{ week.dates }}</div>
                 <div class="column">{{ week.totalDuration }}</div>

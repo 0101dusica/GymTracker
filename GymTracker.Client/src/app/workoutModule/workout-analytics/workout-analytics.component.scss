@@ -22,6 +22,60 @@ body {
     flex-direction: column;
 }
 
+.floating-header {
+    position: fixed;
+    top: 1rem;
+    right: 2rem;
+    z-index: 1000;
+  }
+  
+  .floating-logo {
+    width: 50px;
+    height: 50px;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px #5f99be;
+    
+  }
+
+  .floating-logo:hover {
+    box-shadow: 0 2px 5px #5f99be;
+}
+  
+  .floating-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    padding: 0.5rem 0;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .popup-option {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .popup-option:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .popup-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+  }
+
+  
 .dashboard-container {
     position: relative; 
     width: 60%;

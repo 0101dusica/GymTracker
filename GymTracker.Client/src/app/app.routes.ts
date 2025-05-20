@@ -10,7 +10,7 @@ import { authRequiredGuard } from './authModule/guards/auth-required-guard.guard
 export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [authGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [authGuard] },
-    { path: 'users/:id', component: UserDetailComponent, canActivate: [authRequiredGuard] },
+    { path: 'manage-account', component: UserDetailComponent, canActivate: [authRequiredGuard] },
     { path: 'workouts', component: WorkoutAnalyticsComponent, canActivate: [authRequiredGuard] },
     { path: 'workouts/create', component: AddWorkoutComponent, canActivate: [authRequiredGuard] },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
