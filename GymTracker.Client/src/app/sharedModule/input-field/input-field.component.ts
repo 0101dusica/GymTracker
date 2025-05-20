@@ -14,6 +14,7 @@ export class InputFieldComponent {
   @Input() type: string = 'text';
   @Input() name: string = '';
   @Input() value: string = '';
+  @Input() readOnly: boolean = false;
 
   @Output() valueChange = new EventEmitter<string>(); 
 
