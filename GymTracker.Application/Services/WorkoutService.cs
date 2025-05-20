@@ -33,8 +33,9 @@ namespace GymTracker.Application.Services
             var lastSunday = monthEnd.AddDays(7 - dayOfWeek);
 
             var summary = new List<WeeklyWorkoutSummaryDto>();
+
             var workouts = await _context.WorkoutSessions
-                .Where(w => w.UserId == userId && w.Timestamp >= monthStart && w.Timestamp <= monthEnd)
+                .Where(w => w.UserId == userId && w.Timestamp >= firstMonday && w.Timestamp <= lastSunday)
                 .ToListAsync();
 
             for (var weekStart = firstMonday; weekStart <= lastSunday; weekStart = weekStart.AddDays(7))
