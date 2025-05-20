@@ -1,1 +1,41 @@
-<p>workout-analytics works!</p>
+
+
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="background">
+        <div class="logo-circle">
+            <img src="running.png" alt="GymTracker Logo" class="logo" [routerLink]="['/workouts/create']"/>
+        </div>
+        <div class="dashboard-container">
+        
+            <div class="workout-table">
+              <div class="table-header">
+                <div class="column">Week</div>
+                <div class="column">Total Duration (min)</div>
+                <div class="column">Workout Count</div>
+                <div class="column">Avg Intensity</div>
+                <div class="column">Avg Fatigue</div>
+              </div>
+              <div 
+                class="table-row" 
+                *ngFor="let week of weeklyData" 
+                (click)="openWeekDetails(week)"
+              >
+                <div class="column">{{ week.dates }}</div>
+                <div class="column">{{ week.totalDuration }}</div>
+                <div class="column">{{ week.workoutCount }}</div>
+                <div class="column">{{ week.avgIntensity }}</div>
+                <div class="column">{{ week.avgFatigue }}</div>
+              </div>
+        
+              <div class="month-selector">
+                <button (click)="prevMonth()">&#60;</button>
+                <span>{{ selectedMonth | date: 'MMMM yyyy' }}</span>
+                <button (click)="nextMonth()">&#62;</button>
+              </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    position: fixed; 
+    width: 100%; 
+}
+
+.background {
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: static;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.logo-circle {
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    top: 14%;
+    margin-bottom: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: white;
+    padding: 0;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 2px #5f99be;
+    transition: box-shadow 0.3s ease;
+}
+
+.logo-circle:hover {
+    box-shadow: 0 2px 5px #5f99be;
+}
+
+.logo {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
+.dashboard-container {
+    width: 60%;
+    max-width: 1000px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    font-family: sans-serif;
+}
+  
+.month-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 1rem;
+
+button {
+    background-color: #5f99be;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+span {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+}
+
+.workout-table {
+width: 100%;
+border-collapse: collapse;
+text-align: center;
+}
+
+.table-header, .table-row {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+gap: 0.5rem;
+padding: 1rem;
+border-bottom: 1px solid #ccc;
+align-items: center;
+}
+
+.table-header {
+background-color: #e6f2f8;
+font-weight: bold;
+}
+
+.graph-bar .bar {
+background-color: #5f99be;
+color: white;
+padding: 0.2rem;
+border-radius: 3px;
+transition: height 0.3s;
+display: flex;
+align-items: flex-end;
+justify-content: center;
+height: auto;
+}
+
+.table-row:hover {
+background-color: #f2f9fc;
+cursor: pointer;
+}
