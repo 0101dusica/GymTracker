@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GymTracker.Core.Entities;
 
 namespace GymTracker.Application.Interfaces
 {
     public interface IEmailService
     {
-        Task SendEmailAsync(string to, string subject, string htmlContent);
+        Task SendConfirmationEmailAsync(User user, string token);
     }
 }

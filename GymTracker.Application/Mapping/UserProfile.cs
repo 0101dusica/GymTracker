@@ -8,10 +8,18 @@ namespace GymTracker.Application.Mapping
     {
         public UserProfile()
         {
-            CreateMap<User, UserResponseDto>();
+            CreateMap<User, UserUpdateDto>();
+
+            CreateMap<UserUpdateDto, User>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.Email, opt => opt.Ignore())
+            .ForMember(dest => dest.PasswordHash, opt => opt.Ignore()) 
+            .ForMember(dest => dest.IsActive, opt => opt.Ignore())
+            .ForMember(dest => dest.WorkoutSessions, opt => opt.Ignore()); 
+
             CreateMap<UserRegisterDto, User>()
-            .ForMember(dest => dest.PasswordHash, opt => opt.Ignore())
-            .ForMember(dest => dest.Id, opt => opt.Ignore())           
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.PasswordHash, opt => opt.Ignore())         
             .ForMember(dest => dest.IsActive, opt => opt.Ignore());
         }
     }

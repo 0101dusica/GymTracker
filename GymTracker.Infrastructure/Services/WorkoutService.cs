@@ -1,22 +1,32 @@
-﻿using GymTracker.Application.DTOs.Workout;
+﻿using AutoMapper;
+using GymTracker.Application.DTOs.Workout;
 using GymTracker.Application.Interfaces;
-using GymTracker.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GymTracker.Application.Interfaces.Repositories;
+using GymTracker.Core.Entities;
 
-namespace GymTracker.Application.Services
+namespace GymTracker.Infrastructure.Services
 {
     public class WorkoutService : IWorkoutService
     {
-        private readonly AppDbContext _context;
+        private readonly IWorkoutRepository _repository;
+        private readonly IMapper _mapper;
 
-        public WorkoutService(AppDbContext context)
+        public WorkoutService(IWorkoutRepository repository, IMapper mapper)
         {
-            _context = context;
+            _repository = repository;
+            _mapper = mapper;
+        }
+
+        public async Task<WorkoutSessionDto> CreateAsync(Guid userId, WorkoutSessionDto dto)
+        {
+            var workout = _mapper.Map<WorkoutSession>(dto);
+            workout.Id = Guid.NewGuid();
+            workout.UserId = userId;
+
+            await _repository.AddAsync(workout);
+            await _repository.SaveChangesAsync();
+
+            return _mapper.Map<WorkoutSessionDto>(workout);
         }
 
         public async Task<List<WeeklyWorkoutSummaryDto>> GetMonthlySummaryAsync(Guid userId, DateTime referenceDate)
@@ -32,11 +42,9 @@ namespace GymTracker.Application.Services
 
             var lastSunday = monthEnd.AddDays(7 - dayOfWeek);
 
-            var summary = new List<WeeklyWorkoutSummaryDto>();
+            var workouts = await _repository.GetByUserIdAndDateRangeAsync(userId, firstMonday, lastSunday);
 
-            var workouts = await _context.WorkoutSessions
-                .Where(w => w.UserId == userId && w.Timestamp >= firstMonday && w.Timestamp <= lastSunday)
-                .ToListAsync();
+            var summary = new List<WeeklyWorkoutSummaryDto>();
 
             for (var weekStart = firstMonday; weekStart <= lastSunday; weekStart = weekStart.AddDays(7))
             {
@@ -56,8 +64,5 @@ namespace GymTracker.Application.Services
 
             return summary;
         }
-
-
     }
-
 }

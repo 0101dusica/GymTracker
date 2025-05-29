@@ -1,19 +1,17 @@
-using GymTracker.Infrastructure.Persistence;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using GymTracker.Application.Mapping;
 using GymTracker.Application.Interfaces;
-using GymTracker.Application.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-
+using GymTracker.Application.Interfaces.Repositories;
+using GymTracker.Infrastructure.Services;
+using GymTracker.Infrastructure.Repositories;
+using GymTracker.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -56,15 +54,18 @@ builder.Services.AddAuthentication(options =>
 });
 
 
-
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
-builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 
+builder.Services.AddScoped<IUserService, UserService>(); 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

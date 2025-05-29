@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GymTracker.Application\GymTracker.Application.csproj" />
+    <ProjectReference Include="..\GymTracker.Infrastructure\GymTracker.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

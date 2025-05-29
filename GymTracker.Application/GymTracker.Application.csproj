@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GymTracker.Core\GymTracker.Core.csproj" />
-    <ProjectReference Include="..\GymTracker.Infrastructure\GymTracker.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,12 +1,7 @@
-﻿using GymTracker.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using GymTracker.Application.Interfaces;
 
-namespace GymTracker.Application.Services
+namespace GymTracker.Infrastructure.Services
 {
     public class PasswordHasherService : IPasswordHasherService
     {

@@ -1,12 +1,12 @@
-﻿using GymTracker.Application.Interfaces;
-using GymTracker.Core.Entities;
+﻿using System.Text;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using GymTracker.Core.Entities;
+using GymTracker.Application.Interfaces;
 
-namespace GymTracker.Application.Services
+namespace GymTracker.Infrastructure.Services
 {
     public class TokenService : ITokenService
     {
