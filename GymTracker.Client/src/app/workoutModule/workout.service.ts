@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WeeklyWorkoutDto, WorkoutSession } from './workout.model';
+import { environment } from '../../environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutService {
-  private apiUrl = 'http://localhost:5000/api/workouts';
+  private apiUrl = `${environment.apiBaseUrl}/workouts`;
 
   constructor(private http: HttpClient) {}
 
