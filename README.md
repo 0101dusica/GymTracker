@@ -22,12 +22,12 @@ GymTracker is a web application designed to help users track their workout progr
 
 ### Backend (`GymTracker` solution)
 
-The backend is structured in a modular way for maintainability and scalability:
+The backend follows Clean Architecture principles, ensuring clear separation of concerns and easy maintainability.
 
-- **Core:** Contains the main entities/models such as `User` and `WorkoutSession`.
-- **Infrastructure:** Implements database access and related infrastructure logic.
-- **Application:** Contains business logic, DTOs, interfaces, services, and mapping profiles.
-- **API:** Main application layer with controllers and program entry point.
+- **Core:** Defines domain entities like `User` and `WorkoutSession`.
+- **Application:** Contains business logic, DTOs, interfaces (e.g., `IUserService`, `IUserRepository`), and AutoMapper profiles.
+- **Infrastructure:** Implements services and repositories defined in the Application layer.
+- **API:** Defines controllers which communicate with the Application layer.
 
 The backend is implemented using C# and .NET.
 
